@@ -1,13 +1,13 @@
 package db.commands.parser;
 
-import db.commands.CommandType;
+import db.commands.DataCommand;
 import db.commands.impl.*;
 
 /**
  * Parses the user input and return a Command that will be executed by the database.
  */
-public class SimpleCommandParser implements ICommandParser {
-    public static final String SEPARATOR = " ";
+public class SimpleCommandParser implements CommandParser {
+    public static final String DELIMITER = " ";
 
     @Override
     public Command getCommand(String rawCommand) {
@@ -16,17 +16,17 @@ public class SimpleCommandParser implements ICommandParser {
         }
         rawCommand = rawCommand.trim().toLowerCase();
 
-        CommandType command;
+        DataCommand command;
         String[] args = new String[0];
         //parse input to get type and arguments
-        if (rawCommand.contains(SEPARATOR)) {
-            Integer spacePos = rawCommand.indexOf(SEPARATOR);
+        if (rawCommand.contains(DELIMITER)) {
+            Integer spacePos = rawCommand.indexOf(DELIMITER);
             String type = rawCommand.substring(0, spacePos);
-            command = CommandType.getCommandFromType(type);
+            command = DataCommand.getCommandFromType(type);
             String arguments = rawCommand. substring(spacePos + 1);
             args = arguments.trim().split(" ");
         } else {
-            command = CommandType.getCommandFromType(rawCommand);
+            command = DataCommand.getCommandFromType(rawCommand);
         }
 
         //create command

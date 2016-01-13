@@ -1,6 +1,6 @@
 package db.commands;
 
-public enum CommandType {
+public enum DataCommand {
     SET("set"),
     UNSET("unset"),
     GET("get"),
@@ -13,7 +13,7 @@ public enum CommandType {
 
     private String command;
 
-    private CommandType(String command) {
+    private DataCommand(String command) {
         this.command = command;
     }
 
@@ -21,8 +21,8 @@ public enum CommandType {
         return command;
     }
 
-    public static CommandType getCommandFromType(String type) {
-        for (CommandType validCommand : CommandType.values()) {
+    public static DataCommand getCommandFromType(String type) {
+        for (DataCommand validCommand : DataCommand.values()) {
             if (validCommand.getCommand().equals(type)) {
                 return validCommand;
             }

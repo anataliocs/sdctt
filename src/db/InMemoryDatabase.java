@@ -1,17 +1,17 @@
 package db;
 
 import db.commands.impl.Command;
-import db.commands.parser.ICommandParser;
+import db.commands.parser.CommandParser;
 import db.data.DataContainer;
 
 /**
  * The database wrapper that receives a command and executes it
  */
-public class Database {
+public class InMemoryDatabase {
     private DataContainer dataContainer = new DataContainer();
-    private final ICommandParser parser;
+    private final CommandParser parser;
 
-    public Database(ICommandParser parser) {
+    public InMemoryDatabase(CommandParser parser) {
         this.parser = parser;
     }
 
