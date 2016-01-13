@@ -14,7 +14,7 @@ public class SimpleCommandParser implements CommandParser {
         if (rawCommand == null) {
             return new InvalidCommand("The inserted command does not exist!");
         }
-        rawCommand = rawCommand.trim().toLowerCase();
+        rawCommand = rawCommand.trim().toUpperCase();
 
         DataCommand command;
         String[] args = new String[0];

@@ -1,15 +1,17 @@
 package db.model;
 
+import java.util.Arrays;
+
 public enum DataCommand {
-    SET("set"),
-    UNSET("unset"),
-    GET("get"),
-    NUMEQUALTO("numequalto"),
-    END("end"),
-    BEGIN("begin"),
-    COMMIT("commit"),
-    ROLLBACK("rollback"),
-    INVALID("invalid");
+    SET("SET"),
+    UNSET("UNSET"),
+    GET("GET"),
+    NUMEQUALTO("NUMEQUALTO"),
+    END("END"),
+    BEGIN("BEGIN"),
+    COMMIT("COMMIT"),
+    ROLLBACK("ROLLBACK"),
+    INVALID("INVALID");
 
     private String command;
 
@@ -21,13 +23,9 @@ public enum DataCommand {
         return command;
     }
 
-    public static DataCommand getCommandFromType(String type) {
-        for (DataCommand validCommand : DataCommand.values()) {
-            if (validCommand.getCommand().equals(type)) {
-                return validCommand;
-            }
-        }
-
-        return null;
+    public static DataCommand getCommandFromType(final String type) {
+        return Arrays.asList(DataCommand.values()).stream()
+                .filter(v -> v.getCommand().equals(type))
+                .findFirst().orElse(null);
     }
 }

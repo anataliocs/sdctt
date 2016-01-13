@@ -12,17 +12,18 @@ import db.reader.StdinReaderImpl;
 
 
 public class Main {
+    private static final boolean DEBUG = false;
+
     public static void main(String[] args) {
         Reader reader = new StdinReaderImpl();
         CommandParser parser = new SimpleCommandParser();
-
-        System.out.println("test");
 
         InMemoryDatabase inMemoryDatabase = new InMemoryDatabase(parser);
 
         while (true) {
             String rawCommand = reader.getRawCommand();
-            System.out.println("rawCommand = " + rawCommand);
+            if(DEBUG)
+                System.out.println("rawCommand = " + rawCommand);
             inMemoryDatabase.executeCommand(rawCommand);
         }
     }
