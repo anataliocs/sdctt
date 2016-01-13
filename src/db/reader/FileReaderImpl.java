@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class FileReader implements IReader {
+public class FileReaderImpl implements Reader {
     private Scanner scanner;
 
-    public FileReader(String fileLocation) {
+    public FileReaderImpl(String fileLocation) {
         File file = new File(fileLocation);
         try {
             scanner = new Scanner(file);

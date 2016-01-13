@@ -1,4 +1,4 @@
-package db.commands;
+package db.model;
 
 public enum DataCommand {
     SET("set"),

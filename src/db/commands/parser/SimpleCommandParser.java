@@ -1,6 +1,6 @@
 package db.commands.parser;
 
-import db.commands.DataCommand;
+import db.model.DataCommand;
 import db.commands.impl.*;
 
 /**

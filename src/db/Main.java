@@ -2,8 +2,8 @@ package db;
 
 import db.commands.parser.CommandParser;
 import db.commands.parser.SimpleCommandParser;
-import db.reader.IReader;
-import db.reader.StdinReader;
+import db.reader.Reader;
+import db.reader.StdinReaderImpl;
 /*
 /   Chris Anatalio
     Thumbtack Simple Database Challenge - https://www.thumbtack.com/challenges/simple-database
@@ -13,12 +13,11 @@ import db.reader.StdinReader;
 
 public class Main {
     public static void main(String[] args) {
-        IReader reader = new StdinReader();
+        Reader reader = new StdinReaderImpl();
         CommandParser parser = new SimpleCommandParser();
 
         System.out.println("test");
 
-        //injected parser into inMemoryDatabase, this way we have support for implementing a different command structure
         InMemoryDatabase inMemoryDatabase = new InMemoryDatabase(parser);
 
         while (true) {
