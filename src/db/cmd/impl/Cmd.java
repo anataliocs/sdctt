@@ -1,7 +1,10 @@
-package db.commands.impl;
+package db.cmd.impl;
 
 import db.data.DataWrapper;
 
-public interface Command {
+/**
+ * Created by canatalio on 1/14/16.
+ */
+public interface Cmd {
     public abstract void execute(DataWrapper dataWrapper);
 }

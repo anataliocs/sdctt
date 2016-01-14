@@ -1,10 +1,14 @@
-package db.commands.impl;
+package db.cmd.impl;
 
+import db.cmd.msg.PrintCmdOutput;
 import db.data.DataValues;
 import db.data.DataWrapper;
 import db.data.TransactionManager;
 
-public class CommitCommand implements Command {
+/**
+ * Created by canatalio on 1/14/16.
+ */
+public class CommitCmd implements Cmd {
     @Override
     public void execute(DataWrapper dataWrapper) {
         DataValues dataValues = dataWrapper.getDataValues();
@@ -16,7 +20,7 @@ public class CommitCommand implements Command {
         } else {
             dataWrapper.setDataValues(mergedTransaction);
             transactionManager.cleanOldTransactions();
-            System.out.println();
+            PrintCmdOutput.lineBreak();
         }
     }
 }

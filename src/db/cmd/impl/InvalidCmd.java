@@ -1,11 +1,14 @@
-package db.commands.impl;
+package db.cmd.impl;
 
 import db.data.DataWrapper;
 
-public class InvalidCommand implements Command {
+/**
+ * Created by canatalio on 1/14/16.
+ */
+public class InvalidCmd implements Cmd {
     private String errorMessage;
 
-    public InvalidCommand(String errorMessage) {
+    public InvalidCmd(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 

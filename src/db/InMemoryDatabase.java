@@ -1,7 +1,7 @@
 package db;
 
-import db.commands.impl.Command;
-import db.commands.interpreter.CommandInterpreter;
+import db.cmd.impl.Cmd;
+import db.cmd.interpreter.CmdInterpreter;
 import db.data.DataWrapper;
 
 /**
@@ -9,14 +9,14 @@ import db.data.DataWrapper;
  */
 public class InMemoryDatabase {
     private DataWrapper dataWrapper = new DataWrapper();
-    private final CommandInterpreter parser;
+    private final CmdInterpreter parser;
 
-    public InMemoryDatabase(CommandInterpreter parser) {
+    public InMemoryDatabase(CmdInterpreter parser) {
         this.parser = parser;
     }
 
     public void executeCommand(String rawCommand) {
-        Command command = parser.getCommand(rawCommand);
-        command.execute(dataWrapper);
+        Cmd cmd = parser.getCommand(rawCommand);
+        cmd.execute(dataWrapper);
     }
 }

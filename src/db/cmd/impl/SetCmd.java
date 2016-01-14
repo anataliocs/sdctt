@@ -1,14 +1,17 @@
-package db.commands.impl;
+package db.cmd.impl;
 
 import db.data.DataValues;
 import db.data.DataWrapper;
 import db.data.TransactionManager;
 
-public class SetCommand implements Command {
+/**
+ * Created by canatalio on 1/14/16.
+ */
+public class SetCmd implements Cmd {
     private String name;
     private String value;
 
-    public SetCommand(String name, String value) {
+    public SetCmd(String name, String value) {
         this.name = name;
         this.value = value;
     }

@@ -1,18 +1,18 @@
-package db.commands.interpreter;
+package db.cmd.interpreter;
 
 import db.model.DataCommand;
-import db.commands.impl.*;
+import db.cmd.impl.*;
 
 /**
  * Parses the user input and return a Command that will be executed by the database.
  */
-public class BasicCommandInterpreter implements CommandInterpreter {
+public class BasicCmdInterpreter implements CmdInterpreter {
     public static final String DELIMITER = " ";
 
     @Override
-    public Command getCommand(String rawCommand) {
+    public Cmd getCommand(String rawCommand) {
         if (rawCommand == null) {
-            return new InvalidCommand("The inserted command does not exist!");
+            return new InvalidCmd("The inserted command does not exist!");
         }
         rawCommand = rawCommand.trim().toUpperCase();
 
@@ -33,37 +33,37 @@ public class BasicCommandInterpreter implements CommandInterpreter {
         if (command != null) {
             switch (command) {
                 case END:
-                    return new EndCommand();
+                    return new EndCmd();
                 case BEGIN:
-                    return new BeginCommand();
+                    return new BeginCmd();
                 case COMMIT:
-                    return new CommitCommand();
+                    return new CommitCmd();
                 case ROLLBACK:
-                    return new RollbackCommand();
+                    return new RollbackCmd();
                 case SET:
                     if (args.length == 2) {
-                        return new SetCommand(args[0], args[1]);
+                        return new SetCmd(args[0], args[1]);
                     }
-                    return new InvalidCommand("Invalid number of arguments");
+                    return new InvalidCmd("Invalid number of arguments");
                 case GET:
                     if (args.length == 1) {
-                        return new GetCommand(args[0]);
+                        return new GetCmd(args[0]);
                     }
-                    return new InvalidCommand("Invalid number of arguments");
+                    return new InvalidCmd("Invalid number of arguments");
                 case NUMEQUALTO:
                     if (args.length == 1) {
-                        return new NumEqualToCommand(args[0]);
+                        return new NumEqualToCmd(args[0]);
                     }
-                    return new InvalidCommand("Invalid number of arguments");
+                    return new InvalidCmd("Invalid number of arguments");
                 case UNSET:
                     if (args.length == 1) {
-                        return new UnsetCommand(args[0]);
+                        return new UnsetCmd(args[0]);
                     }
-                    return new InvalidCommand("Invalid number of arguments");
+                    return new InvalidCmd("Invalid number of arguments");
                 default:
                     break;
             }
         }
-        return new InvalidCommand("The inserted command does not exist!");
+        return new InvalidCmd("The inserted command does not exist!");
     }
 }

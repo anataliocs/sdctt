@@ -1,7 +1,7 @@
 package db;
 
-import db.commands.interpreter.CommandInterpreter;
-import db.commands.interpreter.BasicCommandInterpreter;
+import db.cmd.interpreter.CmdInterpreter;
+import db.cmd.interpreter.BasicCmdInterpreter;
 import db.reader.Reader;
 import db.reader.StdinReaderImpl;
 /*
@@ -16,7 +16,7 @@ public class Main {
 
     public static void main(String[] args) {
         Reader reader = new StdinReaderImpl();
-        CommandInterpreter parser = new BasicCommandInterpreter();
+        CmdInterpreter parser = new BasicCmdInterpreter();
 
         InMemoryDatabase inMemoryDatabase = new InMemoryDatabase(parser);
 

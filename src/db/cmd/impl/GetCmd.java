@@ -1,15 +1,18 @@
-package db.commands.impl;
+package db.cmd.impl;
 
 import db.data.DataValues;
 import db.data.DataWrapper;
 import db.data.TransactionManager;
 
-public class GetCommand implements Command {
+/**
+ * Created by canatalio on 1/14/16.
+ */
+public class GetCmd implements Cmd {
     private String name;
 
     private static final String VALUE_NOT_FOUND = "NULL";
 
-    public GetCommand(String name) {
+    public GetCmd(String name) {
         this.name = name;
     }
 

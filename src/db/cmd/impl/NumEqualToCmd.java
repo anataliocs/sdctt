@@ -1,13 +1,16 @@
-package db.commands.impl;
+package db.cmd.impl;
 
 import db.data.DataValues;
 import db.data.DataWrapper;
 import db.data.TransactionManager;
 
-public class NumEqualToCommand implements Command {
+/**
+ * Created by canatalio on 1/14/16.
+ */
+public class NumEqualToCmd implements Cmd {
     private String value;
 
-    public NumEqualToCommand(String value) {
+    public NumEqualToCmd(String value) {
         this.value = value;
     }
 
