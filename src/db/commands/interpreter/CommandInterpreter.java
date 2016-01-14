@@ -1,7 +1,7 @@
-package db.commands.parser;
+package db.commands.interpreter;
 
 import db.commands.impl.Command;
 
-public interface CommandParser {
+public interface CommandInterpreter {
     public Command getCommand(String rawCommand);
 }

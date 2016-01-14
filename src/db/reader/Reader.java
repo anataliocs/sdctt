@@ -1,7 +1,7 @@
 package db.reader;
 
 /**
- * Interface used to give support for future implementations (reading from files, sockets, etc)
+ * Interface to support future implementations
  */
 public interface Reader {
     public String getRawCommand();

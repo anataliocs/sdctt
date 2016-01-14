@@ -1,7 +1,7 @@
 package db;
 
 import db.commands.impl.Command;
-import db.commands.parser.CommandParser;
+import db.commands.interpreter.CommandInterpreter;
 import db.data.DataWrapper;
 
 /**
@@ -9,9 +9,9 @@ import db.data.DataWrapper;
  */
 public class InMemoryDatabase {
     private DataWrapper dataWrapper = new DataWrapper();
-    private final CommandParser parser;
+    private final CommandInterpreter parser;
 
-    public InMemoryDatabase(CommandParser parser) {
+    public InMemoryDatabase(CommandInterpreter parser) {
         this.parser = parser;
     }
 

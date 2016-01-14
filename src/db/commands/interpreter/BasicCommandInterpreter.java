@@ -1,4 +1,4 @@
-package db.commands.parser;
+package db.commands.interpreter;
 
 import db.model.DataCommand;
 import db.commands.impl.*;
@@ -6,7 +6,7 @@ import db.commands.impl.*;
 /**
  * Parses the user input and return a Command that will be executed by the database.
  */
-public class SimpleCommandParser implements CommandParser {
+public class BasicCommandInterpreter implements CommandInterpreter {
     public static final String DELIMITER = " ";
 
     @Override
