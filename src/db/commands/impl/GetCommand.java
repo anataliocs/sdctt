@@ -1,7 +1,7 @@
 package db.commands.impl;
 
-import db.data.Data;
-import db.data.DataContainer;
+import db.data.DataValues;
+import db.data.DataWrapper;
 import db.data.TransactionManager;
 
 public class GetCommand implements Command {
@@ -14,16 +14,16 @@ public class GetCommand implements Command {
     }
 
     @Override
-    public void execute(DataContainer container) {
-        Data data = container.getData();
+    public void execute(DataWrapper container) {
+        DataValues dataValues = container.getDataValues();
         TransactionManager transactionManager = container.getTransactionManager();
 
-        if (data.isKeyDeleted(name)) {
+        if (dataValues.isKeyDeleted(name)) {
             //key is marked as deleted in a transaction
             System.out.println(VALUE_NOT_FOUND);
         } else {
             //find key in most recent transaction
-            String value = data.getKeyValue(name);
+            String value = dataValues.getKeyValue(name);
             if (value == null) {
                 value = transactionManager.getMostRecentValueForKey(name);
             }
@@ -33,7 +33,7 @@ public class GetCommand implements Command {
             } else {
                 System.out.println(value);
                 //cache found value
-                data.setData(name, value);
+                dataValues.setData(name, value);
             }
         }
     }

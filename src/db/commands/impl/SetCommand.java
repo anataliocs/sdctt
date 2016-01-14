@@ -1,7 +1,7 @@
 package db.commands.impl;
 
-import db.data.Data;
-import db.data.DataContainer;
+import db.data.DataValues;
+import db.data.DataWrapper;
 import db.data.TransactionManager;
 
 public class SetCommand implements Command {
@@ -14,33 +14,33 @@ public class SetCommand implements Command {
     }
 
     @Override
-    public void execute(DataContainer container) {
-        Data currentData = container.getData();
+    public void execute(DataWrapper container) {
+        DataValues currentDataValues = container.getDataValues();
         TransactionManager transactionManager = container.getTransactionManager();
 
-        if (!currentData.isKeyDeleted(name)) {
+        if (!currentDataValues.isKeyDeleted(name)) {
             //get oldValue
-            String oldValue = currentData.getKeyValue(name);
+            String oldValue = currentDataValues.getKeyValue(name);
             if (oldValue == null) {
                 oldValue = transactionManager.getMostRecentValueForKey(name);
             }
             //decrement oldValue count
             if (oldValue != null) {
                 Integer decrementedOccurrenceCount = getOccurrenceCountFromAllTransaction(oldValue, container) - 1;
-                currentData.setValueCount(oldValue, decrementedOccurrenceCount);
+                currentDataValues.setValueCount(oldValue, decrementedOccurrenceCount);
             }
         }
 
         //set new value and update value count
         Integer occurrences = getOccurrenceCountFromAllTransaction(value, container);
-        currentData.setValueCount(value, occurrences + 1);
+        currentDataValues.setValueCount(value, occurrences + 1);
 
-        currentData.setData(name, value);
+        currentDataValues.setData(name, value);
         System.out.println();
     }
 
-    private Integer getOccurrenceCountFromAllTransaction(String value, DataContainer container) {
-        Integer occurrenceCount = container.getData().getValueCount(value);
+    private Integer getOccurrenceCountFromAllTransaction(String value, DataWrapper container) {
+        Integer occurrenceCount = container.getDataValues().getValueCount(value);
         if (occurrenceCount == null) {
             occurrenceCount = container.getTransactionManager().getOccurrencesForValue(value);
         }

@@ -1,20 +1,20 @@
 package db.commands.impl;
 
-import db.data.Data;
-import db.data.DataContainer;
+import db.data.DataValues;
+import db.data.DataWrapper;
 import db.data.TransactionManager;
 
 public class CommitCommand implements Command {
     @Override
-    public void execute(DataContainer dataContainer) {
-        Data data = dataContainer.getData();
-        TransactionManager transactionManager = dataContainer.getTransactionManager();
+    public void execute(DataWrapper dataWrapper) {
+        DataValues dataValues = dataWrapper.getDataValues();
+        TransactionManager transactionManager = dataWrapper.getTransactionManager();
 
-        Data mergedTransaction = transactionManager.commit(data);
+        DataValues mergedTransaction = transactionManager.commit(dataValues);
         if (mergedTransaction == null) {
             System.out.println("NO TRANSACTION");
         } else {
-            dataContainer.setData(mergedTransaction);
+            dataWrapper.setDataValues(mergedTransaction);
             transactionManager.cleanOldTransactions();
             System.out.println();
         }

@@ -38,11 +38,11 @@ END
 ```
 
 #####Transaction Commands
-In addition to the above data commands, your program should also support inMemoryDatabase transactions by also implementing these commands:
+In addition to the above dataValues commands, your program should also support inMemoryDatabase transactions by also implementing these commands:
 **BEGIN** – Open a new transaction block. Transaction blocks can be nested; a BEGIN can be issued inside of an existing block.
 **ROLLBACK** – Undo all of the commands issues in the most recent transaction block, and close the block. Print nothing if successful, or print NO TRANSACTION if no transaction is in progress.
 **COMMIT** – Close all open transaction blocks, permanently applying the changes made in them. Print nothing if successful, or print NO TRANSACTION if no transaction is in progress.
-Any data command that is run outside of a transaction block should commit immediately. Here are some example command sequences:
+Any dataValues command that is run outside of a transaction block should commit immediately. Here are some example command sequences:
 
 ```
 INPUT	    OUTPUT
@@ -122,11 +122,11 @@ DataBase components:
 
 I have created a container (DataContainer) for decoupling reasons.
 DataContainer:
-* Data : the current data the is in the inMemoryDatabase
+* Data : the current dataValues the is in the inMemoryDatabase
 * TransactionManager: maintains and handles the nested transactions
 
 Complexity:
-I wanted to achieve **O(1)** runtime for GET, SET, UNSET, and NUMEQUALTO, so I chose to keep my data in Maps. NUMEQUALTO uses it's own map
+I wanted to achieve **O(1)** runtime for GET, SET, UNSET, and NUMEQUALTO, so I chose to keep my dataValues in Maps. NUMEQUALTO uses it's own map
 (inverted index), that is actualized at every SET, UNSET.
 
 A **transaction** contains a Map of key-value, a Map of value-ValueCount and a list of deletedItems that marks the keys deleted in the transaction
@@ -134,7 +134,7 @@ A **transaction** contains a Map of key-value, a Map of value-ValueCount and a l
 
 **Nested transactions** are implemented by maintaining a list of transactions. For example if we are in a nested transaction and we need to search for a key that is in a parent transaction, we will iterate
 through all of the transactions (from newest to oldest) until we found the value we were searching for. In this case the the runtime will increase, but
-to minimize this, I've added a "cache" by adding the data that was searched to the newest transaction data.
+to minimize this, I've added a "cache" by adding the dataValues that was searched to the newest transaction dataValues.
 
 **Committing transactions** are made by merging the maps from the oldest transactions to the newest, first by adding the new values,
  deleting the keys from deletedItems and then updating the valueCounts.

@@ -1,18 +1,18 @@
 package db.commands.impl;
 
-import db.data.Data;
-import db.data.DataContainer;
+import db.data.DataValues;
+import db.data.DataWrapper;
 
 public class RollbackCommand implements Command {
 
     @Override
-    public void execute(DataContainer dataContainer) {
+    public void execute(DataWrapper dataWrapper) {
         //the last transaction is discarded
-        Data data =  dataContainer.getTransactionManager().rollback();
-        if (data == null) {
+        DataValues dataValues =  dataWrapper.getTransactionManager().rollback();
+        if (dataValues == null) {
             System.out.println("NO TRANSACTION");
         } else {
-            dataContainer.setData(data);
+            dataWrapper.setDataValues(dataValues);
             System.out.println();
         }
     }

@@ -1,7 +1,7 @@
 package db.commands.impl;
 
-import db.data.DataContainer;
+import db.data.DataWrapper;
 
 public interface Command {
-    public abstract void execute(DataContainer dataContainer);
+    public abstract void execute(DataWrapper dataWrapper);
 }

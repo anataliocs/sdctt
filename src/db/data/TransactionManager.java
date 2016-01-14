@@ -2,23 +2,24 @@ package db.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Maintains the list of transactions
  *
  */
 public class TransactionManager {
-    private List<Data> previousTransactions = new ArrayList<Data>();
+    private List<DataValues> previousTransactions = new ArrayList<DataValues>();
 
     public TransactionManager() {
     }
 
-    public Data begin(Data oldTransaction) {
+    public DataValues begin(DataValues oldTransaction) {
         previousTransactions.add(oldTransaction);
-        return new Data();
+        return new DataValues();
     }
 
-    public Data rollback() {
+    public DataValues rollback() {
         if (previousTransactions.size() == 0) {
             return null;
         }
@@ -26,21 +27,23 @@ public class TransactionManager {
     }
 
     /**
-     * The transactions are commit one by one, from the oldest to the newest to create a single Data object
+     * The transactions are commit one by one, from the oldest to the newest to create a single DataValues object
      * @param lastTransaction
      * @return
      */
-    public Data commit(Data lastTransaction) {
+    public DataValues commit(DataValues lastTransaction) {
         if (previousTransactions.size() == 0) {
             return null;
         }
-        Data oldestTransaction = previousTransactions.get(0);
+
+        Optional<DataValues> oldestTransaction = previousTransactions.stream().findFirst();
         for (int i = 1; i < previousTransactions.size(); i++) {
-            Data transactionToBeMerged = previousTransactions.get(i);
-            oldestTransaction.mergeTransaction(transactionToBeMerged);
+            DataValues transactionToBeMerged = previousTransactions.get(i);
+            oldestTransaction.get().mergeTransaction(transactionToBeMerged);
         }
-        oldestTransaction.mergeTransaction(lastTransaction);
-        return oldestTransaction;
+
+        oldestTransaction.get().mergeTransaction(lastTransaction);
+        return oldestTransaction.get();
     }
 
     /**
@@ -50,7 +53,7 @@ public class TransactionManager {
      */
     public String getMostRecentValueForKey(String key) {
         for (int i = previousTransactions.size() - 1; i >= 0 ; i--) {
-            Data transaction = previousTransactions.get(i);
+            DataValues transaction = previousTransactions.get(i);
             if (transaction.isKeyDeleted(key)) {
                 return null;
             } else {
@@ -70,7 +73,7 @@ public class TransactionManager {
      */
     public Integer getOccurrencesForValue(String value) {
         for (int i = previousTransactions.size() - 1; i >= 0 ; i--) {
-            Data transaction = previousTransactions.get(i);
+            DataValues transaction = previousTransactions.get(i);
             Integer valueCount = transaction.getValueCount(value);
             if (valueCount != null) {
                 return valueCount;
@@ -83,6 +86,6 @@ public class TransactionManager {
      * Method used to reset the current opened transactions. Used after commit
      */
     public void cleanOldTransactions() {
-        previousTransactions = new ArrayList<Data>();
+        previousTransactions = new ArrayList<DataValues>();
     }
 }

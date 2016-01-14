@@ -2,13 +2,13 @@ package db;
 
 import db.commands.impl.Command;
 import db.commands.parser.CommandParser;
-import db.data.DataContainer;
+import db.data.DataWrapper;
 
 /**
  * The database wrapper that receives a command and executes it
  */
 public class InMemoryDatabase {
-    private DataContainer dataContainer = new DataContainer();
+    private DataWrapper dataWrapper = new DataWrapper();
     private final CommandParser parser;
 
     public InMemoryDatabase(CommandParser parser) {
@@ -17,6 +17,6 @@ public class InMemoryDatabase {
 
     public void executeCommand(String rawCommand) {
         Command command = parser.getCommand(rawCommand);
-        command.execute(dataContainer);
+        command.execute(dataWrapper);
     }
 }

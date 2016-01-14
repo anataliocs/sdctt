@@ -1,7 +1,7 @@
 package db.commands.impl;
 
-import db.data.Data;
-import db.data.DataContainer;
+import db.data.DataValues;
+import db.data.DataWrapper;
 import db.data.TransactionManager;
 
 public class UnsetCommand implements Command {
@@ -12,27 +12,27 @@ public class UnsetCommand implements Command {
     }
 
     @Override
-    public void execute(DataContainer dataContainer) {
-        Data currentData = dataContainer.getData();
-        TransactionManager transactionManager = dataContainer.getTransactionManager();
+    public void execute(DataWrapper dataWrapper) {
+        DataValues currentDataValues = dataWrapper.getDataValues();
+        TransactionManager transactionManager = dataWrapper.getTransactionManager();
 
         //get old value and decrement it's count
-        String oldValue = currentData.getKeyValue(name);
+        String oldValue = currentDataValues.getKeyValue(name);
         if (oldValue == null) {
             oldValue = transactionManager.getMostRecentValueForKey(name);
         }
         if (oldValue != null) {
-            Integer decrementedOccurrenceCount = getOccurrenceCountFromAllTransaction(oldValue, dataContainer) - 1;
-            currentData.setValueCount(oldValue, decrementedOccurrenceCount);
+            Integer decrementedOccurrenceCount = getOccurrenceCountFromAllTransaction(oldValue, dataWrapper) - 1;
+            currentDataValues.setValueCount(oldValue, decrementedOccurrenceCount);
         }
 
         //delete and mark key as deleted
-        currentData.unsetKey(name);
+        currentDataValues.unsetKey(name);
         System.out.println();
     }
 
-    private Integer getOccurrenceCountFromAllTransaction(String value, DataContainer container) {
-        Integer occurrenceCount = container.getData().getValueCount(value);
+    private Integer getOccurrenceCountFromAllTransaction(String value, DataWrapper container) {
+        Integer occurrenceCount = container.getDataValues().getValueCount(value);
         if (occurrenceCount == null) {
             occurrenceCount = container.getTransactionManager().getOccurrencesForValue(value);
         }

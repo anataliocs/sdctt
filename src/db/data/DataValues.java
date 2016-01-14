@@ -15,7 +15,7 @@ import java.util.Map;
  * In case of a concurrent situation, then the Map should be ConcurrentMaps and the operations should acquire locks on the
  * keys it modifies, before taking any action.
  */
-public class Data {
+public class DataValues {
     private Map<String, String> data = new HashMap<String, String>();
     private Map<String, Integer> valueCountMap = new HashMap<String, Integer>();
 
@@ -59,21 +59,21 @@ public class Data {
         data.remove(key);
     }
 
-    public void mergeTransaction(Data transaction) {
+    public void mergeTransaction(DataValues transaction) {
         //merge keys
-        for (String key : transaction.getData().keySet()) {
-            this.data.put(key, transaction.getKeyValue(key));
-        }
+        transaction.getData().keySet().forEach(
+            k -> this.data.put(k, transaction.getKeyValue(k))
+        );
 
-        //delete deleted keys
-        for (String deletedKey : transaction.getKeysToBeDeleted()) {
-            this.data.remove(deletedKey);
-        }
+        //delete keys
+        transaction.getKeysToBeDeleted().forEach(
+                k -> this.data.remove(k)
+        );
 
-        //update valueCounts
-        for (String value : transaction.getValueCountMap().keySet()) {
-            this.valueCountMap.put(value, transaction.getValueCount(value));
-        }
+        //update value count
+        transaction.getValueCountMap().keySet().stream().forEach(
+                k -> this.valueCountMap.put(k, transaction.getValueCount(k))
+        );
     }
 
     private List<String> getKeysToBeDeleted() {

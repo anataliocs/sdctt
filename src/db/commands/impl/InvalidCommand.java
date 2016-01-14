@@ -1,6 +1,6 @@
 package db.commands.impl;
 
-import db.data.DataContainer;
+import db.data.DataWrapper;
 
 public class InvalidCommand implements Command {
     private String errorMessage;
@@ -10,7 +10,7 @@ public class InvalidCommand implements Command {
     }
 
     @Override
-    public void execute(DataContainer dataContainer) {
+    public void execute(DataWrapper dataWrapper) {
         System.out.println(errorMessage);
     }
 }

@@ -1,7 +1,7 @@
 package db.commands.impl;
 
-import db.data.Data;
-import db.data.DataContainer;
+import db.data.DataValues;
+import db.data.DataWrapper;
 import db.data.TransactionManager;
 
 public class NumEqualToCommand implements Command {
@@ -12,16 +12,16 @@ public class NumEqualToCommand implements Command {
     }
 
     @Override
-    public void execute(DataContainer dataContainer) {
-        Data currentData = dataContainer.getData();
-        TransactionManager transactionManager = dataContainer.getTransactionManager();
+    public void execute(DataWrapper dataWrapper) {
+        DataValues currentDataValues = dataWrapper.getDataValues();
+        TransactionManager transactionManager = dataWrapper.getTransactionManager();
 
         //get value count
-        Integer currentCount = currentData.getValueCount(value);
+        Integer currentCount = currentDataValues.getValueCount(value);
         if (currentCount == null) {
             currentCount = transactionManager.getOccurrencesForValue(value);
             //cache count value in current transaction
-            currentData.setValueCount(value, currentCount);
+            currentDataValues.setValueCount(value, currentCount);
         }
         System.out.println(currentCount);
     }
