@@ -12,7 +12,7 @@ public class BasicCmdInterpreter implements CmdInterpreter {
     @Override
     public Cmd getCommand(String rawCommand) {
         if (rawCommand == null) {
-            return new InvalidCmd("The inserted command does not exist!");
+            return new InvalidCmd("Invalid Command");
         }
         rawCommand = rawCommand.trim().toUpperCase();
 
@@ -44,26 +44,26 @@ public class BasicCmdInterpreter implements CmdInterpreter {
                     if (args.length == 2) {
                         return new SetCmd(args[0], args[1]);
                     }
-                    return new InvalidCmd("Invalid number of arguments");
+                    return new InvalidCmd("Invalid # of arguments");
                 case GET:
                     if (args.length == 1) {
                         return new GetCmd(args[0]);
                     }
-                    return new InvalidCmd("Invalid number of arguments");
+                    return new InvalidCmd("Invalid # of arguments");
                 case NUMEQUALTO:
                     if (args.length == 1) {
                         return new NumEqualToCmd(args[0]);
                     }
-                    return new InvalidCmd("Invalid number of arguments");
+                    return new InvalidCmd("Invalid # of arguments");
                 case UNSET:
                     if (args.length == 1) {
                         return new UnsetCmd(args[0]);
                     }
-                    return new InvalidCmd("Invalid number of arguments");
+                    return new InvalidCmd("Invalid # of arguments");
                 default:
                     break;
             }
         }
-        return new InvalidCmd("The inserted command does not exist!");
+        return new InvalidCmd("Invalid Command");
     }
 }
