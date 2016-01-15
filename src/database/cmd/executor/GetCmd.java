@@ -11,9 +11,8 @@ import java.util.Optional;
  * Created by canatalio on 1/14/16.
  */
 public class GetCmd implements Cmd {
-    private String name;
-
     private static final String VALUE_NOT_FOUND = "NULL";
+    private String name;
 
     public GetCmd(String name) {
         this.name = name;

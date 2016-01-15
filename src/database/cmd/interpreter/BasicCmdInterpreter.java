@@ -1,7 +1,7 @@
 package database.cmd.interpreter;
 
-import database.model.DataCommand;
 import database.cmd.executor.*;
+import database.model.DataCommand;
 
 /**
  * Parses the user input and return a Command that will be executed by the database.
@@ -23,7 +23,7 @@ public class BasicCmdInterpreter implements CmdInterpreter {
             Integer spacePos = rawCommand.indexOf(DELIMITER);
             String type = rawCommand.substring(0, spacePos);
             command = DataCommand.getCommandFromType(type);
-            String arguments = rawCommand. substring(spacePos + 1);
+            String arguments = rawCommand.substring(spacePos + 1);
             args = arguments.trim().split(" ");
         } else {
             command = DataCommand.getCommandFromType(rawCommand);

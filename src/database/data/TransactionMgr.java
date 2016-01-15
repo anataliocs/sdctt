@@ -6,7 +6,6 @@ import java.util.Optional;
 
 /**
  * Maintains transactions
- *
  */
 public class TransactionMgr {
     private List<DataValues> previousTransactions = new ArrayList<DataValues>();
@@ -28,6 +27,7 @@ public class TransactionMgr {
 
     /**
      * The transactions are commit one by one, from the oldest to the newest to create a single DataValues object
+     *
      * @param lastTransaction
      * @return
      */
@@ -48,11 +48,12 @@ public class TransactionMgr {
 
     /**
      * Iterates trough the transactions from newest to oldest until if finds the key. If it's not present the will return null.
+     *
      * @param key
      * @return
      */
     public String getMostRecentValueForKey(String key) {
-        for (int i = previousTransactions.size() - 1; i >= 0 ; i--) {
+        for (int i = previousTransactions.size() - 1; i >= 0; i--) {
             DataValues transaction = previousTransactions.get(i);
             if (transaction.isKeyDeleted(key)) {
                 return null;
@@ -68,11 +69,12 @@ public class TransactionMgr {
 
     /**
      * Iterates trough all the transactions from newest to oldest to find the occurrences of the value.
+     *
      * @param value
      * @return
      */
     public Integer getOccurrencesForValue(String value) {
-        for (int i = previousTransactions.size() - 1; i >= 0 ; i--) {
+        for (int i = previousTransactions.size() - 1; i >= 0; i--) {
             DataValues transaction = previousTransactions.get(i);
             Integer valueCount = transaction.getValueCount(value);
             if (valueCount != null) {

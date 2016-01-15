@@ -8,8 +8,8 @@ import database.data.DataWrapper;
  * The database wrapper that receives a command and executes it
  */
 public class InMemoryDatabase {
-    private DataWrapper dataWrapper = new DataWrapper();
     private final CmdInterpreter parser;
+    private DataWrapper dataWrapper = new DataWrapper();
 
     public InMemoryDatabase(CmdInterpreter parser) {
         this.parser = parser;

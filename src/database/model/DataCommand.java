@@ -19,13 +19,13 @@ public enum DataCommand {
         this.command = command;
     }
 
-    public String getCommand() {
-        return command;
-    }
-
     public static DataCommand getCommandFromType(final String type) {
         return Arrays.asList(DataCommand.values()).stream()
                 .filter(v -> v.getCommand().equals(type))
                 .findFirst().orElse(null);
+    }
+
+    public String getCommand() {
+        return command;
     }
 }
