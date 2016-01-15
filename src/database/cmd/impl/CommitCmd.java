@@ -5,6 +5,8 @@ import database.data.DataValues;
 import database.data.DataWrapper;
 import database.data.TransactionManager;
 
+import java.util.Optional;
+
 /**
  * Created by canatalio on 1/14/16.
  */
@@ -16,11 +18,11 @@ public class CommitCmd implements Cmd {
 
         DataValues mergedTransaction = transactionManager.commit(dataValues);
         if (mergedTransaction == null) {
-            System.out.println("NO TRANSACTION");
+            PrintCmdOutput.printMsg(Optional.of("NO TRANSACTION"));
         } else {
             dataWrapper.setDataValues(mergedTransaction);
             transactionManager.cleanOldTransactions();
-            PrintCmdOutput.lineBreak();
+            PrintCmdOutput.printMsg(Optional.<String>empty());
         }
     }
 }

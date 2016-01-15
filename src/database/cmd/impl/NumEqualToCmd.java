@@ -1,8 +1,11 @@
 package database.cmd.impl;
 
+import database.cmd.msg.PrintCmdOutput;
 import database.data.DataValues;
 import database.data.DataWrapper;
 import database.data.TransactionManager;
+
+import java.util.Optional;
 
 /**
  * Created by canatalio on 1/14/16.
@@ -26,6 +29,6 @@ public class NumEqualToCmd implements Cmd {
             //cache count value in current transaction
             currentDataValues.setValueCount(value, currentCount);
         }
-        System.out.println(currentCount);
+        PrintCmdOutput.printMsg(Optional.of(currentCount.toString()));
     }
 }

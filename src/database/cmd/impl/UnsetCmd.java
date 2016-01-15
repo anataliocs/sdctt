@@ -1,8 +1,11 @@
 package database.cmd.impl;
 
+import database.cmd.msg.PrintCmdOutput;
 import database.data.DataValues;
 import database.data.DataWrapper;
 import database.data.TransactionManager;
+
+import java.util.Optional;
 
 /**
  * Created by canatalio on 1/14/16.
@@ -31,7 +34,7 @@ public class UnsetCmd implements Cmd {
 
         //delete and mark key as deleted
         currentDataValues.unsetKey(name);
-        System.out.println();
+        PrintCmdOutput.printMsg(Optional.<String>empty());
     }
 
     private Integer getOccurrenceCountFromAllTransaction(String value, DataWrapper container) {

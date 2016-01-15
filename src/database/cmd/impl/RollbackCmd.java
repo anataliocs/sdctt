@@ -1,7 +1,10 @@
 package database.cmd.impl;
 
+import database.cmd.msg.PrintCmdOutput;
 import database.data.DataValues;
 import database.data.DataWrapper;
+
+import java.util.Optional;
 
 /**
  * Created by canatalio on 1/14/16.
@@ -13,10 +16,10 @@ public class RollbackCmd implements Cmd {
         //the last transaction is discarded
         DataValues dataValues =  dataWrapper.getTransactionManager().rollback();
         if (dataValues == null) {
-            System.out.println("NO TRANSACTION");
+            PrintCmdOutput.printMsg(Optional.of("NO TRANSACTION"));
         } else {
             dataWrapper.setDataValues(dataValues);
-            System.out.println();
+            PrintCmdOutput.printMsg(Optional.<String>empty());
         }
     }
 }

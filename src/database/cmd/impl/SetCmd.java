@@ -1,8 +1,11 @@
 package database.cmd.impl;
 
+import database.cmd.msg.PrintCmdOutput;
 import database.data.DataValues;
 import database.data.DataWrapper;
 import database.data.TransactionManager;
+
+import java.util.Optional;
 
 /**
  * Created by canatalio on 1/14/16.
@@ -39,7 +42,7 @@ public class SetCmd implements Cmd {
         currentDataValues.setValueCount(value, occurrences + 1);
 
         currentDataValues.setData(name, value);
-        System.out.println();
+        PrintCmdOutput.printMsg(Optional.<String>empty());
     }
 
     private Integer getOccurrenceCountFromAllTransaction(String value, DataWrapper container) {
