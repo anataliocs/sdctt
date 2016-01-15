@@ -3,7 +3,7 @@ package database;
 import database.cmd.interpreter.CmdInterpreter;
 import database.cmd.interpreter.BasicCmdInterpreter;
 import database.reader.Reader;
-import database.reader.StdinReaderImpl;
+import database.reader.StdInReaderImpl;
 /*
 /   Chris Anatalio
     Thumbtack Simple Database Challenge - https://www.thumbtack.com/challenges/simple-database
@@ -19,7 +19,7 @@ public class Application {
     private static InMemoryDatabase inMemoryDatabase;
 
     static {
-        reader = new StdinReaderImpl();
+        reader = new StdInReaderImpl();
         parser = new BasicCmdInterpreter();
         inMemoryDatabase = new InMemoryDatabase(parser);
     }

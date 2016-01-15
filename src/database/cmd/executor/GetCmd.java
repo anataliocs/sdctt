@@ -1,9 +1,9 @@
-package database.cmd.impl;
+package database.cmd.executor;
 
-import database.cmd.msg.PrintCmdOutput;
+import database.cmd.msg.PrintCmdOutputSvc;
 import database.data.DataValues;
 import database.data.DataWrapper;
-import database.data.TransactionManager;
+import database.data.TransactionMgr;
 
 import java.util.Optional;
 
@@ -22,22 +22,22 @@ public class GetCmd implements Cmd {
     @Override
     public void execute(DataWrapper container) {
         DataValues dataValues = container.getDataValues();
-        TransactionManager transactionManager = container.getTransactionManager();
+        TransactionMgr transactionMgr = container.getTransactionMgr();
 
         if (dataValues.isKeyDeleted(name)) {
             //key flagged as deleted in a transaction
-            PrintCmdOutput.printMsg(Optional.of(VALUE_NOT_FOUND));
+            PrintCmdOutputSvc.printMsg(Optional.of(VALUE_NOT_FOUND));
         } else {
             //find key in most recent transaction
             String value = dataValues.getKeyValue(name);
             if (value == null) {
-                value = transactionManager.getMostRecentValueForKey(name);
+                value = transactionMgr.getMostRecentValueForKey(name);
             }
 
             if (value == null) {
-                PrintCmdOutput.printMsg(Optional.of(VALUE_NOT_FOUND));
+                PrintCmdOutputSvc.printMsg(Optional.of(VALUE_NOT_FOUND));
             } else {
-                PrintCmdOutput.printMsg(Optional.of(value));
+                PrintCmdOutputSvc.printMsg(Optional.of(value));
                 //cache value located
                 dataValues.setData(name, value);
             }

@@ -1,6 +1,6 @@
-package database.cmd.impl;
+package database.cmd.executor;
 
-import database.cmd.msg.PrintCmdOutput;
+import database.cmd.msg.PrintCmdOutputSvc;
 import database.data.DataWrapper;
 
 import java.util.Optional;
@@ -13,6 +13,6 @@ public class BeginCmd implements Cmd {
     public void execute(DataWrapper dataWrapper) {
         dataWrapper.updateDataToNewTransaction();
 
-        PrintCmdOutput.printMsg(Optional.<String>empty());
+        PrintCmdOutputSvc.printMsg(Optional.<String>empty());
     }
 }

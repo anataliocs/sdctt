@@ -1,9 +1,9 @@
-package database.cmd.impl;
+package database.cmd.executor;
 
-import database.cmd.msg.PrintCmdOutput;
+import database.cmd.msg.PrintCmdOutputSvc;
 import database.data.DataValues;
 import database.data.DataWrapper;
-import database.data.TransactionManager;
+import database.data.TransactionMgr;
 
 import java.util.Optional;
 
@@ -20,15 +20,15 @@ public class NumEqualToCmd implements Cmd {
     @Override
     public void execute(DataWrapper dataWrapper) {
         DataValues currentDataValues = dataWrapper.getDataValues();
-        TransactionManager transactionManager = dataWrapper.getTransactionManager();
+        TransactionMgr transactionMgr = dataWrapper.getTransactionMgr();
 
         //get value count
         Integer currentCount = currentDataValues.getValueCount(value);
         if (currentCount == null) {
-            currentCount = transactionManager.getOccurrencesForValue(value);
+            currentCount = transactionMgr.getOccurrencesForValue(value);
             //cache count value in current transaction
             currentDataValues.setValueCount(value, currentCount);
         }
-        PrintCmdOutput.printMsg(Optional.of(currentCount.toString()));
+        PrintCmdOutputSvc.printMsg(Optional.of(currentCount.toString()));
     }
 }

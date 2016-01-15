@@ -1,6 +1,6 @@
-package database.cmd.impl;
+package database.cmd.executor;
 
-import database.cmd.msg.PrintCmdOutput;
+import database.cmd.msg.PrintCmdOutputSvc;
 import database.data.DataValues;
 import database.data.DataWrapper;
 
@@ -14,12 +14,12 @@ public class RollbackCmd implements Cmd {
     @Override
     public void execute(DataWrapper dataWrapper) {
         //the last transaction is discarded
-        DataValues dataValues =  dataWrapper.getTransactionManager().rollback();
+        DataValues dataValues =  dataWrapper.getTransactionMgr().rollback();
         if (dataValues == null) {
-            PrintCmdOutput.printMsg(Optional.of("NO TRANSACTION"));
+            PrintCmdOutputSvc.printMsg(Optional.of("NO TRANSACTION"));
         } else {
             dataWrapper.setDataValues(dataValues);
-            PrintCmdOutput.printMsg(Optional.<String>empty());
+            PrintCmdOutputSvc.printMsg(Optional.<String>empty());
         }
     }
 }

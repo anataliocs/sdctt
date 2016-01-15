@@ -1,9 +1,9 @@
-package database.cmd.impl;
+package database.cmd.executor;
 
-import database.cmd.msg.PrintCmdOutput;
+import database.cmd.msg.PrintCmdOutputSvc;
 import database.data.DataValues;
 import database.data.DataWrapper;
-import database.data.TransactionManager;
+import database.data.TransactionMgr;
 
 import java.util.Optional;
 
@@ -20,12 +20,12 @@ public class UnsetCmd implements Cmd {
     @Override
     public void execute(DataWrapper dataWrapper) {
         DataValues currentDataValues = dataWrapper.getDataValues();
-        TransactionManager transactionManager = dataWrapper.getTransactionManager();
+        TransactionMgr transactionMgr = dataWrapper.getTransactionMgr();
 
         //get old value and decrement it's count
         String oldValue = currentDataValues.getKeyValue(name);
         if (oldValue == null) {
-            oldValue = transactionManager.getMostRecentValueForKey(name);
+            oldValue = transactionMgr.getMostRecentValueForKey(name);
         }
         if (oldValue != null) {
             Integer decrementedOccurrenceCount = getOccurrenceCountFromAllTransaction(oldValue, dataWrapper) - 1;
@@ -34,13 +34,13 @@ public class UnsetCmd implements Cmd {
 
         //delete and mark key as deleted
         currentDataValues.unsetKey(name);
-        PrintCmdOutput.printMsg(Optional.<String>empty());
+        PrintCmdOutputSvc.printMsg(Optional.<String>empty());
     }
 
     private Integer getOccurrenceCountFromAllTransaction(String value, DataWrapper container) {
         Integer occurrenceCount = container.getDataValues().getValueCount(value);
         if (occurrenceCount == null) {
-            occurrenceCount = container.getTransactionManager().getOccurrencesForValue(value);
+            occurrenceCount = container.getTransactionMgr().getOccurrencesForValue(value);
         }
         return occurrenceCount;
     }

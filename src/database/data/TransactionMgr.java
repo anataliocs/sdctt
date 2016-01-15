@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Maintains the list of transactions
+ * Maintains transactions
  *
  */
-public class TransactionManager {
+public class TransactionMgr {
     private List<DataValues> previousTransactions = new ArrayList<DataValues>();
 
-    public TransactionManager() {
+    public TransactionMgr() {
     }
 
     public DataValues begin(DataValues oldTransaction) {

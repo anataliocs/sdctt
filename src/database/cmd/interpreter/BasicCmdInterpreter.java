@@ -1,7 +1,7 @@
 package database.cmd.interpreter;
 
 import database.model.DataCommand;
-import database.cmd.impl.*;
+import database.cmd.executor.*;
 
 /**
  * Parses the user input and return a Command that will be executed by the database.

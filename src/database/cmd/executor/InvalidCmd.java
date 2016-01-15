@@ -1,4 +1,4 @@
-package database.cmd.impl;
+package database.cmd.executor;
 
 import database.data.DataWrapper;
 

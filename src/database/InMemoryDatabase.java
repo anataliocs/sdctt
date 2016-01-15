@@ -1,6 +1,6 @@
 package database;
 
-import database.cmd.impl.Cmd;
+import database.cmd.executor.Cmd;
 import database.cmd.interpreter.CmdInterpreter;
 import database.data.DataWrapper;
 

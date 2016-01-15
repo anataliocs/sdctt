@@ -1,9 +1,9 @@
-package database.cmd.impl;
+package database.cmd.executor;
 
-import database.cmd.msg.PrintCmdOutput;
+import database.cmd.msg.PrintCmdOutputSvc;
 import database.data.DataValues;
 import database.data.DataWrapper;
-import database.data.TransactionManager;
+import database.data.TransactionMgr;
 
 import java.util.Optional;
 
@@ -22,13 +22,13 @@ public class SetCmd implements Cmd {
     @Override
     public void execute(DataWrapper container) {
         DataValues currentDataValues = container.getDataValues();
-        TransactionManager transactionManager = container.getTransactionManager();
+        TransactionMgr transactionMgr = container.getTransactionMgr();
 
         if (!currentDataValues.isKeyDeleted(name)) {
             //get oldValue
             String oldValue = currentDataValues.getKeyValue(name);
             if (oldValue == null) {
-                oldValue = transactionManager.getMostRecentValueForKey(name);
+                oldValue = transactionMgr.getMostRecentValueForKey(name);
             }
             //decrement oldValue count
             if (oldValue != null) {
@@ -42,13 +42,13 @@ public class SetCmd implements Cmd {
         currentDataValues.setValueCount(value, occurrences + 1);
 
         currentDataValues.setData(name, value);
-        PrintCmdOutput.printMsg(Optional.<String>empty());
+        PrintCmdOutputSvc.printMsg(Optional.<String>empty());
     }
 
     private Integer getOccurrenceCountFromAllTransaction(String value, DataWrapper container) {
         Integer occurrenceCount = container.getDataValues().getValueCount(value);
         if (occurrenceCount == null) {
-            occurrenceCount = container.getTransactionManager().getOccurrencesForValue(value);
+            occurrenceCount = container.getTransactionMgr().getOccurrencesForValue(value);
         }
         return occurrenceCount;
     }
