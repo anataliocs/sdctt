@@ -9,14 +9,18 @@ import database.data.DataWrapper;
  */
 public class InMemoryDatabase {
     private final CmdInterpreter parser;
-    private DataWrapper dataWrapper = new DataWrapper();
+    private final DataWrapper dataWrapper;
 
-    public InMemoryDatabase(CmdInterpreter parser) {
+    {
+        dataWrapper = new DataWrapper();
+    }
+
+    public InMemoryDatabase(final CmdInterpreter parser) {
         this.parser = parser;
     }
 
-    public void executeCommand(String rawCommand) {
-        Cmd cmd = parser.getCommand(rawCommand);
+    public void executeCommand(final String rawCommand) {
+        final Cmd cmd = parser.getCommand(rawCommand);
         cmd.execute(dataWrapper);
     }
 }

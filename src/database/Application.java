@@ -11,13 +11,12 @@ import database.reader.Reader;
 
  */
 
-
 public class Application {
     private static final boolean DEBUG = false;
 
-    private static Reader reader;
-    private static CmdInterpreter parser;
-    private static InMemoryDatabase inMemoryDatabase;
+    private static final Reader reader;
+    private static final CmdInterpreter parser;
+    private static final InMemoryDatabase inMemoryDatabase;
 
     static {
         reader = new BasicReaderImpl();
@@ -25,10 +24,10 @@ public class Application {
         inMemoryDatabase = new InMemoryDatabase(parser);
     }
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 
         while (true) {
-            String rawCommand = reader.getRawCommand();
+            final String rawCommand = reader.getRawCommand();
             inMemoryDatabase.executeCommand(rawCommand);
 
             if (DEBUG)
