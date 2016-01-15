@@ -9,10 +9,13 @@ import database.model.DataCommand;
 public class BasicCmdInterpreter implements CmdInterpreter {
     public static final String DELIMITER = " ";
 
+    public static final String INVALID_NUM_OF_ARGS = "Invalid # of arguments";
+    public static final String INVALID_CMD = "Invalid Command";
+
     @Override
     public Cmd getCommand(String rawCommand) {
         if (rawCommand == null) {
-            return new InvalidCmd("Invalid Command");
+            return new InvalidCmd(INVALID_CMD);
         }
         rawCommand = rawCommand.trim().toUpperCase();
 
@@ -44,26 +47,26 @@ public class BasicCmdInterpreter implements CmdInterpreter {
                     if (args.length == 2) {
                         return new SetCmd(args[0], args[1]);
                     }
-                    return new InvalidCmd("Invalid # of arguments");
+                    return new InvalidCmd(INVALID_NUM_OF_ARGS);
                 case GET:
                     if (args.length == 1) {
                         return new GetCmd(args[0]);
                     }
-                    return new InvalidCmd("Invalid # of arguments");
+                    return new InvalidCmd(INVALID_NUM_OF_ARGS);
                 case NUMEQUALTO:
                     if (args.length == 1) {
                         return new NumEqualToCmd(args[0]);
                     }
-                    return new InvalidCmd("Invalid # of arguments");
+                    return new InvalidCmd(INVALID_NUM_OF_ARGS);
                 case UNSET:
                     if (args.length == 1) {
                         return new UnsetCmd(args[0]);
                     }
-                    return new InvalidCmd("Invalid # of arguments");
+                    return new InvalidCmd(INVALID_NUM_OF_ARGS);
                 default:
                     break;
             }
         }
-        return new InvalidCmd("Invalid Command");
+        return new InvalidCmd(INVALID_CMD);
     }
 }

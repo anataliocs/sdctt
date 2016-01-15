@@ -16,7 +16,7 @@ public class RollbackCmd implements Cmd {
         //the last transaction is discarded
         DataValues dataValues = dataWrapper.getTransactionMgr().rollback();
         if (dataValues == null) {
-            PrintCmdOutputSvc.printMsg(Optional.of("NO TRANSACTION"));
+            PrintCmdOutputSvc.printMsg(Optional.of(NO_TRANSACTION));
         } else {
             dataWrapper.setDataValues(dataValues);
             PrintCmdOutputSvc.printMsg(Optional.<String>empty());

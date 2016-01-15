@@ -1,7 +1,7 @@
 package database.reader;
 
 /**
- * Interface to support future implementations
+ * Interface for generality
  */
 public interface Reader {
     public String getRawCommand();

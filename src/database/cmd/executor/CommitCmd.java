@@ -11,6 +11,9 @@ import java.util.Optional;
  * Created by canatalio on 1/14/16.
  */
 public class CommitCmd implements Cmd {
+
+
+
     @Override
     public void execute(DataWrapper dataWrapper) {
         DataValues dataValues = dataWrapper.getDataValues();
@@ -18,7 +21,7 @@ public class CommitCmd implements Cmd {
 
         DataValues mergedTransaction = transactionMgr.commit(dataValues);
         if (mergedTransaction == null) {
-            PrintCmdOutputSvc.printMsg(Optional.of("NO TRANSACTION"));
+            PrintCmdOutputSvc.printMsg(Optional.of(NO_TRANSACTION));
         } else {
             dataWrapper.setDataValues(mergedTransaction);
             transactionMgr.cleanOldTransactions();
