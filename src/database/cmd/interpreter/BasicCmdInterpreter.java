@@ -26,15 +26,11 @@ public class BasicCmdInterpreter implements CmdInterpreter {
 
         List<String> rawCommands = Arrays.asList(rawCommand.trim().toUpperCase().split(DELIMITER));
 
-        final DataCommand command =
-                DataCommand.getCommandFromType(
-                        rawCommands.stream()
-                                .filter(rc -> !rc.isEmpty())
-                                .findFirst().get()
-                );
-
         final List<String> args = rawCommands.stream()
+                .filter(rc -> rc != null && !rc.isEmpty())
                 .collect(Collectors.toList());
+
+        final DataCommand command = DataCommand.getCommandFromType(args.get(0));
 
         //create command
         if (command != null) {
