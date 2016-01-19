@@ -3,10 +3,8 @@ package database.cmd.interpreter;
 import database.cmd.executor.*;
 import database.model.DataCommand;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**

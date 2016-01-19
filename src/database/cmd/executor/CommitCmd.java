@@ -13,7 +13,6 @@ import java.util.Optional;
 public class CommitCmd implements Cmd {
 
 
-
     @Override
     public void execute(DataWrapper dataWrapper) {
         DataValues dataValues = dataWrapper.getDataValues();

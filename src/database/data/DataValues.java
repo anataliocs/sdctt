@@ -16,10 +16,10 @@ import java.util.Map;
  * keys it modifies, before taking any action.
  */
 public class DataValues {
-    private final Map<String, String> data = new HashMap<String, String>();
-    private final Map<String, Integer> valueCountMap = new HashMap<String, Integer>();
+    private final Map<String, String> data = new HashMap<>();
+    private final Map<String, Integer> valueCountMap = new HashMap<>();
 
-    private final List<String> keysToBeDeleted = new ArrayList<String>();
+    private final List<String> keysToBeDeleted = new ArrayList<>();
 
     public void setData(String key, String value) {
         if (keysToBeDeleted.contains(key)) {
@@ -67,7 +67,7 @@ public class DataValues {
 
         //delete keys
         transaction.getKeysToBeDeleted().forEach(
-                k -> this.data.remove(k)
+                this.data::remove
         );
 
         //update value count

@@ -8,7 +8,7 @@ import java.util.Optional;
  * Maintains transactions
  */
 public class TransactionMgr {
-    private List<DataValues> previousTransactions = new ArrayList<DataValues>();
+    private List<DataValues> previousTransactions = new ArrayList<>();
 
 
     public TransactionMgr() {
@@ -89,6 +89,6 @@ public class TransactionMgr {
      * Method used to reset the current opened transactions. Used after commit
      */
     public void cleanOldTransactions() {
-        previousTransactions = new ArrayList<DataValues>();
+        previousTransactions = new ArrayList<>();
     }
 }
