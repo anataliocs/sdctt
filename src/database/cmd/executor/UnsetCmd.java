@@ -4,6 +4,7 @@ import database.cmd.msg.PrintCmdOutputSvc;
 import database.data.DataValues;
 import database.data.DataWrapper;
 import database.data.TransactionMgr;
+import database.model.DataCommand;
 
 import java.util.Optional;
 
@@ -11,6 +12,9 @@ import java.util.Optional;
  * Created by canatalio on 1/14/16.
  */
 public class UnsetCmd implements Cmd {
+
+    public static final DataCommand CMD_STRING = DataCommand.UNSET;
+
     private final String name;
 
     public UnsetCmd(String name) {

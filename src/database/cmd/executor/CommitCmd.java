@@ -4,6 +4,7 @@ import database.cmd.msg.PrintCmdOutputSvc;
 import database.data.DataValues;
 import database.data.DataWrapper;
 import database.data.TransactionMgr;
+import database.model.DataCommand;
 
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import java.util.Optional;
  */
 public class CommitCmd implements Cmd {
 
+    public static final DataCommand CMD_STRING = DataCommand.COMMIT;
 
     @Override
     public void execute(DataWrapper dataWrapper) {

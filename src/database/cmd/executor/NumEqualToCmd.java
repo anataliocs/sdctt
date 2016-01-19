@@ -4,6 +4,7 @@ import database.cmd.msg.PrintCmdOutputSvc;
 import database.data.DataValues;
 import database.data.DataWrapper;
 import database.data.TransactionMgr;
+import database.model.DataCommand;
 
 import java.util.Optional;
 
@@ -12,6 +13,8 @@ import java.util.Optional;
  */
 public class NumEqualToCmd implements Cmd {
     private final String value;
+
+    public static final DataCommand CMD_STRING = DataCommand.NUMEQUALTO;
 
     public NumEqualToCmd(String value) {
         this.value = value;

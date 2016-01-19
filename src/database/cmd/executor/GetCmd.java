@@ -4,6 +4,7 @@ import database.cmd.msg.PrintCmdOutputSvc;
 import database.data.DataValues;
 import database.data.DataWrapper;
 import database.data.TransactionMgr;
+import database.model.DataCommand;
 
 import java.util.Optional;
 
@@ -13,6 +14,8 @@ import java.util.Optional;
 public class GetCmd implements Cmd {
     private static final String VALUE_NOT_FOUND = "NULL";
     private final String name;
+
+    public static final DataCommand CMD_STRING = DataCommand.GET;
 
     public GetCmd(String name) {
         this.name = name;
