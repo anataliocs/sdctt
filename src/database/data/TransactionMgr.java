@@ -10,6 +10,7 @@ import java.util.Optional;
 public class TransactionMgr {
     private List<DataValues> previousTransactions = new ArrayList<DataValues>();
 
+
     public TransactionMgr() {
     }
 
