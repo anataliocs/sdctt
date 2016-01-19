@@ -12,7 +12,7 @@ import java.util.Optional;
  */
 public class GetCmd implements Cmd {
     private static final String VALUE_NOT_FOUND = "NULL";
-    private String name;
+    private final String name;
 
     public GetCmd(String name) {
         this.name = name;

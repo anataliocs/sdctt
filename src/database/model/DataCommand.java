@@ -13,7 +13,7 @@ public enum DataCommand {
     ROLLBACK("ROLLBACK"),
     INVALID("INVALID");
 
-    private String command;
+    private final String command;
 
     private DataCommand(String command) {
         this.command = command;
@@ -25,7 +25,7 @@ public enum DataCommand {
                 .findFirst().orElse(null);
     }
 
-    public String getCommand() {
+    String getCommand() {
         return command;
     }
 }

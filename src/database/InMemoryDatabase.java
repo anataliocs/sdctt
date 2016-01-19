@@ -7,7 +7,7 @@ import database.data.DataWrapper;
 /**
  * The database wrapper that receives a command and executes it
  */
-public class InMemoryDatabase {
+class InMemoryDatabase {
     private final CmdInterpreter parser;
     private final DataWrapper dataWrapper;
 

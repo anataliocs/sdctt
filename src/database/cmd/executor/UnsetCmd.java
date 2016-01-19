@@ -11,7 +11,7 @@ import java.util.Optional;
  * Created by canatalio on 1/14/16.
  */
 public class UnsetCmd implements Cmd {
-    private String name;
+    private final String name;
 
     public UnsetCmd(String name) {
         this.name = name;

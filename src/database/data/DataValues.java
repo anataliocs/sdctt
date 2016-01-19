@@ -16,10 +16,10 @@ import java.util.Map;
  * keys it modifies, before taking any action.
  */
 public class DataValues {
-    private Map<String, String> data = new HashMap<String, String>();
-    private Map<String, Integer> valueCountMap = new HashMap<String, Integer>();
+    private final Map<String, String> data = new HashMap<String, String>();
+    private final Map<String, Integer> valueCountMap = new HashMap<String, Integer>();
 
-    private List<String> keysToBeDeleted = new ArrayList<String>();
+    private final List<String> keysToBeDeleted = new ArrayList<String>();
 
     public void setData(String key, String value) {
         if (keysToBeDeleted.contains(key)) {
@@ -28,7 +28,7 @@ public class DataValues {
         data.put(key, value);
     }
 
-    public Map<String, String> getData() {
+    Map<String, String> getData() {
         return data;
     }
 

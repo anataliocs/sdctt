@@ -11,7 +11,7 @@ import database.reader.Reader;
 
  */
 
-public class Application {
+class Application {
     private static final boolean DEBUG = false;
 
     private static final Reader reader;
@@ -35,7 +35,7 @@ public class Application {
         }
     }
 
-    public static void debug(String rawCommand) {
+    private static void debug(String rawCommand) {
         System.out.println("rawCommand = " + rawCommand);
     }
 }

@@ -11,8 +11,8 @@ import java.util.Optional;
  * Created by canatalio on 1/14/16.
  */
 public class SetCmd implements Cmd {
-    private String name;
-    private String value;
+    private final String name;
+    private final String value;
 
     public SetCmd(String name, String value) {
         this.name = name;

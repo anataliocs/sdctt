@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
  * Parses the user input and return a Command that will be executed by the database.
  */
 public class BasicCmdInterpreter implements CmdInterpreter {
-    public static final String DELIMITER = " ";
+    private static final String DELIMITER = " ";
 
-    public static final String INVALID_NUM_OF_ARGS = "Invalid # of arguments";
-    public static final String INVALID_CMD = "Invalid Command";
+    private static final String INVALID_NUM_OF_ARGS = "Invalid # of arguments";
+    private static final String INVALID_CMD = "Invalid Command";
 
     @Override
     public Cmd getCommand(String rawCommand) {
