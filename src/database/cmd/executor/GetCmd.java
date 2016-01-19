@@ -3,7 +3,7 @@ package database.cmd.executor;
 import database.cmd.msg.PrintCmdOutputSvc;
 import database.data.DataValues;
 import database.data.DataWrapper;
-import database.data.TransactionMgr;
+import database.data.manager.TransactionMgr;
 import database.model.DataCommand;
 
 import java.util.Optional;

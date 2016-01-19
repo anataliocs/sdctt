@@ -1,5 +1,7 @@
 package database.data;
 
+import database.data.manager.TransactionMgr;
+
 /**
  * Stores the past transaction and the current data
  */
