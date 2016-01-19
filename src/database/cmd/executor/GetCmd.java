@@ -27,10 +27,10 @@ public class GetCmd implements Cmd {
         TransactionMgr transactionMgr = container.getTransactionMgr();
 
         if (dataValues.isKeyDeleted(name)) {
-            //key flagged as deleted in a transaction
+            // Flag key as deleted
             PrintCmdOutputSvc.printMsg(Optional.of(VALUE_NOT_FOUND));
         } else {
-            //find key in most recent transaction
+            // Find key
             String value = dataValues.getKeyValue(name);
             if (value == null) {
                 value = transactionMgr.getCurrentValForKey(name);
@@ -40,7 +40,7 @@ public class GetCmd implements Cmd {
                 PrintCmdOutputSvc.printMsg(Optional.of(VALUE_NOT_FOUND));
             } else {
                 PrintCmdOutputSvc.printMsg(Optional.of(value));
-                //cache value located
+                // Cache value
                 dataValues.setData(name, value);
             }
         }

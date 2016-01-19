@@ -29,31 +29,31 @@ public class SetCmd implements Cmd {
         TransactionMgr transactionMgr = container.getTransactionMgr();
 
         if (!currentDataValues.isKeyDeleted(name)) {
-            //get oldValue
-            String oldValue = currentDataValues.getKeyValue(name);
-            if (oldValue == null) {
-                oldValue = transactionMgr.getCurrentValForKey(name);
+            // Get old value
+            String oldVal = currentDataValues.getKeyValue(name);
+            if (oldVal == null) {
+                oldVal = transactionMgr.getCurrentValForKey(name);
             }
-            //decrement oldValue count
-            if (oldValue != null) {
-                Integer decrementedOccurrenceCount = getOccurrenceCountFromAllTransaction(oldValue, container) - 1;
-                currentDataValues.setValueCount(oldValue, decrementedOccurrenceCount);
+            // Decrement old value
+            if (oldVal != null) {
+                Integer decrementedOccurrenceCount = getCountFromAllTransaction(oldVal, container) - 1;
+                currentDataValues.setValueCount(oldVal, decrementedOccurrenceCount);
             }
         }
 
-        //set new value and update value count
-        Integer occurrences = getOccurrenceCountFromAllTransaction(value, container);
+        // Set new value and count
+        Integer occurrences = getCountFromAllTransaction(value, container);
         currentDataValues.setValueCount(value, occurrences + 1);
 
         currentDataValues.setData(name, value);
         PrintCmdOutputSvc.printMsg(Optional.<String>empty());
     }
 
-    private Integer getOccurrenceCountFromAllTransaction(String value, DataWrapper container) {
-        Integer occurrenceCount = container.getDataValues().getValueCount(value);
-        if (occurrenceCount == null) {
-            occurrenceCount = container.getTransactionMgr().getNumOfTimesValIsPresent(value);
+    private Integer getCountFromAllTransaction(String value, DataWrapper container) {
+        Integer count = container.getDataValues().getValueCount(value);
+        if (count == null) {
+            count = container.getTransactionMgr().getNumOfTimesValIsPresent(value);
         }
-        return occurrenceCount;
+        return count;
     }
 }

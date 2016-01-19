@@ -25,11 +25,11 @@ public class NumEqualToCmd implements Cmd {
         DataValues currentDataValues = dataWrapper.getDataValues();
         TransactionMgr transactionMgr = dataWrapper.getTransactionMgr();
 
-        //get value count
+        // Get count
         Integer currentCount = currentDataValues.getValueCount(value);
         if (currentCount == null) {
             currentCount = transactionMgr.getNumOfTimesValIsPresent(value);
-            //cache count value in current transaction
+            // Cache count value
             currentDataValues.setValueCount(value, currentCount);
         }
         PrintCmdOutputSvc.printMsg(Optional.of(currentCount.toString()));

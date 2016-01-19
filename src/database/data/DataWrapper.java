@@ -25,7 +25,7 @@ public class DataWrapper {
         this.dataValues = dataValues;
     }
 
-    public void updateDataToNewTransaction() {
+    public void updateNewTransaction() {
         dataValues = transactionMgr.start(dataValues);
     }
 }

@@ -21,6 +21,7 @@ public class CommitCmd implements Cmd {
         TransactionMgr transactionMgr = dataWrapper.getTransactionMgr();
 
         DataValues mergedTransaction = transactionMgr.commit(dataValues);
+
         if (mergedTransaction == null) {
             PrintCmdOutputSvc.printMsg(Optional.of(NO_TRANSACTION));
         } else {

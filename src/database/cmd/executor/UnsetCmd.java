@@ -26,26 +26,26 @@ public class UnsetCmd implements Cmd {
         DataValues currentDataValues = dataWrapper.getDataValues();
         TransactionMgr transactionMgr = dataWrapper.getTransactionMgr();
 
-        //get old value and decrement it's count
-        String oldValue = currentDataValues.getKeyValue(name);
-        if (oldValue == null) {
-            oldValue = transactionMgr.getCurrentValForKey(name);
+        // Get and decrement old value
+        String oldVal = currentDataValues.getKeyValue(name);
+        if (oldVal == null) {
+            oldVal = transactionMgr.getCurrentValForKey(name);
         }
-        if (oldValue != null) {
-            Integer decrementedOccurrenceCount = getOccurrenceCountFromAllTransaction(oldValue, dataWrapper) - 1;
-            currentDataValues.setValueCount(oldValue, decrementedOccurrenceCount);
+        if (oldVal != null) {
+            Integer decrementedOccurrenceCount = getCountFromAllTransaction(oldVal, dataWrapper) - 1;
+            currentDataValues.setValueCount(oldVal, decrementedOccurrenceCount);
         }
 
-        //delete and mark key as deleted
+        // Delete key
         currentDataValues.unsetKey(name);
         PrintCmdOutputSvc.printMsg(Optional.<String>empty());
     }
 
-    private Integer getOccurrenceCountFromAllTransaction(String value, DataWrapper container) {
-        Integer occurrenceCount = container.getDataValues().getValueCount(value);
-        if (occurrenceCount == null) {
-            occurrenceCount = container.getTransactionMgr().getNumOfTimesValIsPresent(value);
+    private Integer getCountFromAllTransaction(String value, DataWrapper container) {
+        Integer count = container.getDataValues().getValueCount(value);
+        if (count == null) {
+            count = container.getTransactionMgr().getNumOfTimesValIsPresent(value);
         }
-        return occurrenceCount;
+        return count;
     }
 }

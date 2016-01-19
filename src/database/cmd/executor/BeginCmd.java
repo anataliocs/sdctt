@@ -15,8 +15,8 @@ public class BeginCmd implements Cmd {
 
     @Override
     public void execute(DataWrapper dataWrapper) {
-        dataWrapper.updateDataToNewTransaction();
 
+        dataWrapper.updateNewTransaction();
         PrintCmdOutputSvc.printMsg(Optional.<String>empty());
     }
 }
