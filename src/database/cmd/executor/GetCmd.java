@@ -33,7 +33,7 @@ public class GetCmd implements Cmd {
             //find key in most recent transaction
             String value = dataValues.getKeyValue(name);
             if (value == null) {
-                value = transactionMgr.getMostRecentValueForKey(name);
+                value = transactionMgr.getCurrentValForKey(name);
             }
 
             if (value == null) {

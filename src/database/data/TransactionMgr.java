@@ -5,57 +5,52 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Maintains transactions
+ * Manage transactions
  */
 public class TransactionMgr {
-    private List<DataValues> previousTransactions = new ArrayList<>();
+    private List<DataValues> transactionQueue = new ArrayList<>();
 
 
     public TransactionMgr() {
     }
 
-    public DataValues begin(DataValues oldTransaction) {
-        previousTransactions.add(oldTransaction);
+    public DataValues start(DataValues oldTransaction) {
+        transactionQueue.add(oldTransaction);
         return new DataValues();
     }
 
     public DataValues rollback() {
-        if (previousTransactions.size() == 0) {
+        if (transactionQueue.isEmpty()) {
             return null;
         }
-        return previousTransactions.remove(previousTransactions.size() - 1);
+        return transactionQueue.remove(transactionQueue.size() - 1);
     }
 
     /**
-     * The transactions are commit one by one, from the oldest to the newest to create a single DataValues object
+     * Commit transactions from oldest to most recent to create DataValues object
      *
-     * @param lastTransaction
-     * @return
      */
     public DataValues commit(DataValues lastTransaction) {
-        if (previousTransactions.size() == 0) {
+        if (transactionQueue.isEmpty()) {
             return null;
         }
 
-        Optional<DataValues> oldestTransaction = previousTransactions.stream().findFirst();
-        for (int i = 1; i < previousTransactions.size(); i++) {
-            DataValues transactionToBeMerged = previousTransactions.get(i);
-            oldestTransaction.get().mergeTransaction(transactionToBeMerged);
-        }
+        Optional<DataValues> oldestTransaction = transactionQueue.stream()
+                .limit(1).findFirst();
+        transactionQueue.stream().skip(1).
+                forEach(pt -> oldestTransaction.get().mergeTransaction(pt));
 
         oldestTransaction.get().mergeTransaction(lastTransaction);
         return oldestTransaction.get();
     }
 
     /**
-     * Iterates trough the transactions from newest to oldest until if finds the key. If it's not present the will return null.
+     * Iterate through transactions from most recent to oldest searching for key. Will return null if not found.
      *
-     * @param key
-     * @return
      */
-    public String getMostRecentValueForKey(String key) {
-        for (int i = previousTransactions.size() - 1; i >= 0; i--) {
-            DataValues transaction = previousTransactions.get(i);
+    public String getCurrentValForKey(String key) {
+        for (int i = transactionQueue.size() - 1; i >= 0; i--) {
+            DataValues transaction = transactionQueue.get(i);
             if (transaction.isKeyDeleted(key)) {
                 return null;
             } else {
@@ -69,14 +64,12 @@ public class TransactionMgr {
     }
 
     /**
-     * Iterates trough all the transactions from newest to oldest to find the occurrences of the value.
+     * Iterates through transactions from most recent to oldest to find value
      *
-     * @param value
-     * @return
      */
-    public Integer getOccurrencesForValue(String value) {
-        for (int i = previousTransactions.size() - 1; i >= 0; i--) {
-            DataValues transaction = previousTransactions.get(i);
+    public Integer getNumOfTimesValIsPresent(String value) {
+        for (int i = transactionQueue.size() - 1; i >= 0; i--) {
+            DataValues transaction = transactionQueue.get(i);
             Integer valueCount = transaction.getValueCount(value);
             if (valueCount != null) {
                 return valueCount;
@@ -86,9 +79,9 @@ public class TransactionMgr {
     }
 
     /**
-     * Method used to reset the current opened transactions. Used after commit
+     * Resets currently open transactions
      */
-    public void cleanOldTransactions() {
-        previousTransactions = new ArrayList<>();
+    public void flush() {
+        transactionQueue = new ArrayList<>();
     }
 }

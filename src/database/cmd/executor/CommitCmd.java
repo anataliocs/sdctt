@@ -25,7 +25,7 @@ public class CommitCmd implements Cmd {
             PrintCmdOutputSvc.printMsg(Optional.of(NO_TRANSACTION));
         } else {
             dataWrapper.setDataValues(mergedTransaction);
-            transactionMgr.cleanOldTransactions();
+            transactionMgr.flush();
             PrintCmdOutputSvc.printMsg(Optional.<String>empty());
         }
     }

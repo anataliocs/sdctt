@@ -28,7 +28,7 @@ public class NumEqualToCmd implements Cmd {
         //get value count
         Integer currentCount = currentDataValues.getValueCount(value);
         if (currentCount == null) {
-            currentCount = transactionMgr.getOccurrencesForValue(value);
+            currentCount = transactionMgr.getNumOfTimesValIsPresent(value);
             //cache count value in current transaction
             currentDataValues.setValueCount(value, currentCount);
         }

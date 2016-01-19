@@ -32,7 +32,7 @@ public class SetCmd implements Cmd {
             //get oldValue
             String oldValue = currentDataValues.getKeyValue(name);
             if (oldValue == null) {
-                oldValue = transactionMgr.getMostRecentValueForKey(name);
+                oldValue = transactionMgr.getCurrentValForKey(name);
             }
             //decrement oldValue count
             if (oldValue != null) {
@@ -52,7 +52,7 @@ public class SetCmd implements Cmd {
     private Integer getOccurrenceCountFromAllTransaction(String value, DataWrapper container) {
         Integer occurrenceCount = container.getDataValues().getValueCount(value);
         if (occurrenceCount == null) {
-            occurrenceCount = container.getTransactionMgr().getOccurrencesForValue(value);
+            occurrenceCount = container.getTransactionMgr().getNumOfTimesValIsPresent(value);
         }
         return occurrenceCount;
     }

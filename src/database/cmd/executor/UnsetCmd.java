@@ -29,7 +29,7 @@ public class UnsetCmd implements Cmd {
         //get old value and decrement it's count
         String oldValue = currentDataValues.getKeyValue(name);
         if (oldValue == null) {
-            oldValue = transactionMgr.getMostRecentValueForKey(name);
+            oldValue = transactionMgr.getCurrentValForKey(name);
         }
         if (oldValue != null) {
             Integer decrementedOccurrenceCount = getOccurrenceCountFromAllTransaction(oldValue, dataWrapper) - 1;
@@ -44,7 +44,7 @@ public class UnsetCmd implements Cmd {
     private Integer getOccurrenceCountFromAllTransaction(String value, DataWrapper container) {
         Integer occurrenceCount = container.getDataValues().getValueCount(value);
         if (occurrenceCount == null) {
-            occurrenceCount = container.getTransactionMgr().getOccurrencesForValue(value);
+            occurrenceCount = container.getTransactionMgr().getNumOfTimesValIsPresent(value);
         }
         return occurrenceCount;
     }

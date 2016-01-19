@@ -1,7 +1,7 @@
 package database.data;
 
 /**
- * Container that stores the past transaction (TransactionManager) and the current used dataValues (DataValues)
+ * Stores the past transaction and the current data
  */
 public class DataWrapper {
     private final TransactionMgr transactionMgr;
@@ -24,6 +24,6 @@ public class DataWrapper {
     }
 
     public void updateDataToNewTransaction() {
-        dataValues = transactionMgr.begin(dataValues);
+        dataValues = transactionMgr.start(dataValues);
     }
 }
