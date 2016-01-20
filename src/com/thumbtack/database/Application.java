@@ -5,6 +5,15 @@ import com.thumbtack.database.cmd.interpreter.CmdInterpreter;
 import com.thumbtack.database.reader.BasicReaderImpl;
 import com.thumbtack.database.reader.Reader;
 
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /*
 /   Chris Anatalio
     Thumbtack Simple Database Challenge - https://www.com.thumbtack.com/challenges/simple-com.thumbtack.database
@@ -12,7 +21,6 @@ import com.thumbtack.database.reader.Reader;
  */
 
 class Application {
-    private static final boolean DEBUG = false;
 
     private static final Reader reader;
     private static final CmdInterpreter parser;
@@ -26,16 +34,31 @@ class Application {
 
     public static void main(final String[] args) {
 
-        while (true) {
-            final String rawCommand = reader.getRawCommand();
-            inMemoryDatabase.executeCommand(rawCommand);
 
-            if (DEBUG)
-                debug(rawCommand);
+
+        //Read commands from file
+        if(args != null && args.length > 0) {
+            URL filePathAsString = Application.class.getResource(args[0]);
+
+            Path filePath = Paths.get(filePathAsString.getPath());
+            List<String> lines = new ArrayList<>();
+            try {
+                lines = Files.lines(filePath).collect(
+                        Collectors.toList());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            lines.stream().forEach( cmd ->
+                    inMemoryDatabase.executeCommand(cmd));
         }
-    }
 
-    private static void debug(String rawCommand) {
-        System.out.println("rawCommand = " + rawCommand);
+        //Else read from standard input
+        else {
+            while (true) {
+                final String rawCommand = reader.getRawCommand();
+                inMemoryDatabase.executeCommand(rawCommand);
+            }
+        }
     }
 }
