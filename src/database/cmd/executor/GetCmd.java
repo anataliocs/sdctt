@@ -12,10 +12,9 @@ import java.util.Optional;
  * Created by canatalio on 1/14/16.
  */
 public class GetCmd implements Cmd {
+    public static final DataCommand CMD_STRING = DataCommand.GET;
     private static final String VALUE_NOT_FOUND = "NULL";
     private final String name;
-
-    public static final DataCommand CMD_STRING = DataCommand.GET;
 
     public GetCmd(String name) {
         this.name = name;

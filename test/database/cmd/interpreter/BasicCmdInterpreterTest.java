@@ -5,10 +5,9 @@ import junit.framework.TestCase;
 
 public class BasicCmdInterpreterTest extends TestCase {
 
-    BasicCmdInterpreter classUnderTest = new BasicCmdInterpreter();
-
     public static final String DEFAULT_VAR = " a";
     public static final String DEFAULT_VAL = " 10";
+    BasicCmdInterpreter classUnderTest = new BasicCmdInterpreter();
 
     public void setUp() throws Exception {
         super.setUp();

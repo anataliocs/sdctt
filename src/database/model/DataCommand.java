@@ -3,15 +3,15 @@ package database.model;
 import java.util.Arrays;
 
 public enum DataCommand {
-    SET("SET",3),
-    UNSET("UNSET",2),
-    GET("GET",2),
-    NUMEQUALTO("NUMEQUALTO",2),
-    END("END",0),
-    BEGIN("BEGIN",0),
-    COMMIT("COMMIT",0),
-    ROLLBACK("ROLLBACK",0),
-    INVALID("INVALID",0);
+    SET("SET", 3),
+    UNSET("UNSET", 2),
+    GET("GET", 2),
+    NUMEQUALTO("NUMEQUALTO", 2),
+    END("END", 0),
+    BEGIN("BEGIN", 0),
+    COMMIT("COMMIT", 0),
+    ROLLBACK("ROLLBACK", 0),
+    INVALID("INVALID", 0);
 
     private final String command;
     private final int requiredNumOfArgs;

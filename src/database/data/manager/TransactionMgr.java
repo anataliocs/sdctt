@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Manage transactions
@@ -42,12 +41,12 @@ public class TransactionMgr {
      */
     public Integer getNumOfTimesValIsPresent(String value) {
 
-        if(transactionQueue.isEmpty())
+        if (transactionQueue.isEmpty())
             return 0;
 
         ListIterator<DataValues> itr = transactionQueue.listIterator(transactionQueue.size());
 
-        while(itr.hasPrevious()) {
+        while (itr.hasPrevious()) {
             DataValues transaction = itr.previous();
             Optional<Integer> valueCount = Optional.ofNullable(transaction.getValueCount(value));
             if (valueCount.isPresent()) {
@@ -60,7 +59,6 @@ public class TransactionMgr {
 
     /**
      * Commit transactions from oldest to most recent to create DataValues object
-     *
      */
     public DataValues commit(DataValues lastTransaction) {
         if (transactionQueue.isEmpty()) {
@@ -81,12 +79,12 @@ public class TransactionMgr {
      */
     public String getCurrentValForKey(String key) {
 
-        if(transactionQueue.isEmpty())
+        if (transactionQueue.isEmpty())
             return null;
 
         ListIterator<DataValues> itr = transactionQueue.listIterator(transactionQueue.size());
 
-        while(itr.hasPrevious()) {
+        while (itr.hasPrevious()) {
             DataValues data = itr.previous();
             if (data.isKeyDeleted(key)) {
                 return null;

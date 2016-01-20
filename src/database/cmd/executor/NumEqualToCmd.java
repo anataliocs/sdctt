@@ -12,9 +12,8 @@ import java.util.Optional;
  * Created by canatalio on 1/14/16.
  */
 public class NumEqualToCmd implements Cmd {
-    private final String value;
-
     public static final DataCommand CMD_STRING = DataCommand.NUMEQUALTO;
+    private final String value;
 
     public NumEqualToCmd(String value) {
         this.value = value;
