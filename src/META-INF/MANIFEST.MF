@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: database.Application
+Main-Class: com.thumbtack.database.Application
 
