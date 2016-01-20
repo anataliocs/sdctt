@@ -34,13 +34,10 @@ class Application {
 
     public static void main(final String[] args) {
 
-
-
         //Read commands from file
         if(args != null && args.length > 0) {
-            URL filePathAsString = Application.class.getResource(args[0]);
 
-            Path filePath = Paths.get(filePathAsString.getPath());
+            Path filePath = Paths.get(args[0]);
             List<String> lines = new ArrayList<>();
             try {
                 lines = Files.lines(filePath).collect(
