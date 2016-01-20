@@ -6,14 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Contains the current data that is being queried and modified by the user.
- * If there are transactions open, this will contain the data of the latest opened transaction
- * <p>
- * Choose to use maps for storing the data and valueCountMap, because we have O(1) runtime for get, set, unset, numEqualTo.
- * The list keysToBeDeleted is used to mark the keys that need to be deleted when committing the transactions
- * <p>
- * In case of a concurrent situation, then the Map should be ConcurrentMaps and the operations should acquire locks on the
- * keys it modifies, before taking any action.
+ * Data currently being operated on
+ * If this were a concurrent application, then  ConcurrentMaps should be used.
+ * Operations should acquire locks on the keys before performing any action.
  */
 public class DataValues {
     private final Map<String, String> data = new HashMap<>();
@@ -60,17 +55,17 @@ public class DataValues {
     }
 
     public void mergeTransaction(DataValues transaction) {
-        //merge keys
+        // Merge
         transaction.getData().keySet().forEach(
                 k -> this.data.put(k, transaction.getKeyValue(k))
         );
 
-        //delete keys
+        // Delete
         transaction.getKeysToBeDeleted().forEach(
                 this.data::remove
         );
 
-        //update value count
+        // Update count
         transaction.getValueCountMap().keySet().stream().forEach(
                 k -> this.valueCountMap.put(k, transaction.getValueCount(k))
         );

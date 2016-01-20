@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Parses the user input and return a Command that will be executed by the com.thumbtack.database.
+ * Parses user input and returns executable Cmd
  */
 public class BasicCmdInterpreter implements CmdInterpreter {
     private static final String DELIMITER = " ";
@@ -24,7 +24,7 @@ public class BasicCmdInterpreter implements CmdInterpreter {
     private static final String INVALID_CMD = "Invalid Command";
 
     @Override
-    public Cmd getCommand(String rawCommand) {
+    public Cmd getExecutableCommand(String rawCommand) {
         if (rawCommand == null || rawCommand.isEmpty()) {
             return new InvalidCmd(INVALID_CMD);
         }
@@ -39,7 +39,7 @@ public class BasicCmdInterpreter implements CmdInterpreter {
     }
 
     private Cmd buildCommand(List<String> args) {
-        final DataCommand command = DataCommand.getCommandFromType(args.get(0));
+        final DataCommand command = DataCommand.getCommandFromString(args.get(0));
 
         if (command != null) {
             switch (command) {

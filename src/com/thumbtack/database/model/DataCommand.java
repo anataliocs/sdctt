@@ -22,7 +22,7 @@ public enum DataCommand {
         this.requiredNumOfArgs = args;
     }
 
-    public static DataCommand getCommandFromType(final String type) {
+    public static DataCommand getCommandFromString(final String type) {
         return Arrays.asList(DataCommand.values()).stream()
                 .filter(v -> v.getCommand().equals(type))
                 .findFirst().orElse(null);

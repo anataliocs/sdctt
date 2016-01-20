@@ -20,7 +20,7 @@ public class BasicCmdInterpreterTest extends TestCase {
 
     public void testBeginCmd() throws Exception {
 
-        Cmd actualResponse = classUnderTest.getCommand(
+        Cmd actualResponse = classUnderTest.getExecutableCommand(
                 BeginCmd.CMD_STRING.name()
         );
 
@@ -29,7 +29,7 @@ public class BasicCmdInterpreterTest extends TestCase {
 
     public void testCommitCmd() throws Exception {
 
-        Cmd actualResponse = classUnderTest.getCommand(
+        Cmd actualResponse = classUnderTest.getExecutableCommand(
                 CommitCmd.CMD_STRING.name()
         );
 
@@ -38,7 +38,7 @@ public class BasicCmdInterpreterTest extends TestCase {
 
     public void testEndCmd() throws Exception {
 
-        Cmd actualResponse = classUnderTest.getCommand(
+        Cmd actualResponse = classUnderTest.getExecutableCommand(
                 EndCmd.CMD_STRING.name()
         );
 
@@ -47,7 +47,7 @@ public class BasicCmdInterpreterTest extends TestCase {
 
     public void testGetCmd() throws Exception {
 
-        Cmd actualResponse = classUnderTest.getCommand(
+        Cmd actualResponse = classUnderTest.getExecutableCommand(
                 GetCmd.CMD_STRING.name() + DEFAULT_VAR
         );
 
@@ -56,7 +56,7 @@ public class BasicCmdInterpreterTest extends TestCase {
 
     public void testInvalidCmd() throws Exception {
 
-        Cmd actualResponse = classUnderTest.getCommand(
+        Cmd actualResponse = classUnderTest.getExecutableCommand(
                 InvalidCmd.CMD_STRING.name()
         );
 
@@ -67,7 +67,7 @@ public class BasicCmdInterpreterTest extends TestCase {
 
     public void testNumEqualToCmd() throws Exception {
 
-        Cmd actualResponse = classUnderTest.getCommand(
+        Cmd actualResponse = classUnderTest.getExecutableCommand(
                 NumEqualToCmd.CMD_STRING.name() + DEFAULT_VAL
         );
 
@@ -76,7 +76,7 @@ public class BasicCmdInterpreterTest extends TestCase {
 
     public void testRollbackCmd() throws Exception {
 
-        Cmd actualResponse = classUnderTest.getCommand(
+        Cmd actualResponse = classUnderTest.getExecutableCommand(
                 RollbackCmd.CMD_STRING.name()
         );
 
@@ -85,7 +85,7 @@ public class BasicCmdInterpreterTest extends TestCase {
 
     public void testSetCmd() throws Exception {
 
-        Cmd actualResponse = classUnderTest.getCommand(
+        Cmd actualResponse = classUnderTest.getExecutableCommand(
                 SetCmd.CMD_STRING.name() + DEFAULT_VAR + DEFAULT_VAL
         );
 
@@ -94,7 +94,7 @@ public class BasicCmdInterpreterTest extends TestCase {
 
     public void testUnsetCmd() throws Exception {
 
-        Cmd actualResponse = classUnderTest.getCommand(
+        Cmd actualResponse = classUnderTest.getExecutableCommand(
                 UnsetCmd.CMD_STRING.name() + DEFAULT_VAR
         );
 

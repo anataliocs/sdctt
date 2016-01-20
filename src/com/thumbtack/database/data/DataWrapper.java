@@ -3,7 +3,7 @@ package com.thumbtack.database.data;
 import com.thumbtack.database.data.manager.TransactionMgr;
 
 /**
- * Stores the past transaction and the current data
+ * Wrapper for transactions and data
  */
 public class DataWrapper {
     private final TransactionMgr transactionMgr;
